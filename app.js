@@ -93,6 +93,8 @@ dino.prototype.compareLocation = function(humanObj) {
 
 //Compare method 3 - compare diet
 dino.prototype.compareDiet = function(humanObj) {
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt
+  //Last modified: Apr 21, 2020, by MDN contributors - referenced on Nov 24, 2020 by MM
     if(humanObj !== null && humanObj.species == 'human') {
         const getVowels = ['a', 'e', 'i', 'o','u'];
         const startsWithVowel =  this ? this.diet.charAt(0) : humanObj.diet.charAt(0);
@@ -117,20 +119,23 @@ dino.prototype.compareDiet = function(humanObj) {
 */
 
 dino.prototype.randomfact = function (humanObj) {
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+  //Doc last updated Nov 1, 2020, by MDN contributors - referenced on Nov 24,2020 by MM
     if(humanObj !== null) {
         const getThis = this;
+        //used the length of when the dinos lived to help generate a random number
         const maxNumber = getThis.when.length;
         const getRandomNum = Math.floor(Math.random() * (maxNumber - 0) + 0);
 
         if(getRandomNum > 0 &&  getRandomNum < 3) {
             return getThis.fact;
-        } else if (getRandomNum <= 3 && getRandomNum < 6) {
+        } else if (getRandomNum >= 3 && getRandomNum < 6) {
             return getThis.compareDiet(humanObj);
-        } else if (getRandomNum <= 6 && getRandomNum < 9) {
+        } else if (getRandomNum >= 6 && getRandomNum < 9) {
             return `The ${getThis.species} weighed ${getThis.weight}lbs.`;
-        } else if (getRandomNum <= 9 && getRandomNum < 12) {
+        } else if (getRandomNum >= 9 && getRandomNum < 12) {
             return getThis.compareLocation(humanObj);
-        } else if (getRandomNum <= 12 && getRandomNum > 15) {
+        } else if (getRandomNum >= 12 && getRandomNum > 15) {
             return getThis.compareHeight(humanObj);
         } else {
             return getThis.fact;
@@ -209,7 +214,9 @@ const createObjRenderPage =  (dinoObj, humanObj) => {
 
 const buildGrid = (compareObject) => {
     //https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+    //Last modified: Aug 25, 2020, by MDN contributors - referenced Nov 24, 2020 by MM
     //https://developer.mozilla.org/en-US/docs/Web/API/Document/createAttribute
+    //Last modified: Mar 18, 2019, by MDN contributors - referenced Nov 24, 2020 by MM
     let factContent;
     compareObject.forEach(a => {
         compareObject.forEach(b => {
@@ -264,7 +271,9 @@ const buildGrid = (compareObject) => {
 */
 
 const getUserInput = () => {
-   //get user data from form and assign to variables
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase
+    //Last modified: Mar 26, 2020, by MDN contributors, referenced on Nov 24, 2020 by MM
+    //get user data from form and assign to variables
     const name = document.getElementById('name').value;
     const feet = document.getElementById('feet').value;
     const inches = document.getElementById('inches').value;
@@ -278,8 +287,9 @@ const getUserInput = () => {
 };
 
 /**
-* @description Function called on button click - gets human data from form, makes new XMLHttpRequest to
-* get dinosaur json from dino.json file. When the json is loaded, pass dino json and human object to createObjRenderPage()
+* @description Function called on button click - gets human data from form,
+* makes new XMLHttpRequest to get dinosaur json from dino.json file.
+* When the json is loaded, pass dino json and human object to createObjRenderPage()
 * and remove form from page.
 */
 
@@ -288,8 +298,11 @@ const setUpCompareObjectData = () => {
     const getHumanData =  getUserInput();
     // Get data from dino.json file
     //https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
+    //Last modified: Oct 31, 2020, by MDN contributors - referenced on Nov 24, 2020 by MM
     //https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+    //Last modified: May 20, 2020, by MDN contributors - referenced on Nov 24, 2020 by MM
     //https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
+    //Last modified: Aug 9, 2020, by MDN contributors - referenced on Nov 24, 2020 by MM
     const getDinoJson = 'dino.json';
     const request = new XMLHttpRequest();
     request.open('GET', getDinoJson);
